@@ -3,13 +3,12 @@ package com.techvd.bmiapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import com.techvd.bmiapp.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -17,9 +16,12 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        binding.button.setOnClickListener{
+            calculate()
+        }
     }
 
-    fun calculate(view: View) {
+    private fun calculate(){
 
         if (binding.weight.text.isNotEmpty() && binding.height.text.isNotEmpty()) {
             val num = binding.weight.text.toString().toFloat()
@@ -27,7 +29,6 @@ class MainActivity : AppCompatActivity() {
             val result1 = num / (num1 * num1)
             binding.result.text = result1.toString()
             binding.image1.setImageResource(picture(result1))
-
         }
         else{
             Toast.makeText(this, "enter the needed field", Toast.LENGTH_SHORT).show()
